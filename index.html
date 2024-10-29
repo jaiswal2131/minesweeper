@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <div class="minesweeper">
+        <div class="minesweeper-header">
+          <select class="minesweeper-level">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <div class="minesweeper-flag">
+            <div class="minesweeper-flag-icon">🚩</div>
+            <div class="minesweeper-flag-count"></div>
+          </div>
+          <div class="minesweeper-controls">
+            <img class="minesweeper-restart button-icon" src="assets/restart.svg" alt="Restart" />
+            <img class="minesweeper-exit button-icon" src="assets/exit.svg" alt="Exit" />
+          </div>
+        </div>
+        <div class="minesweeper-board">
+          <!-- Rows come here -->
+        </div>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
