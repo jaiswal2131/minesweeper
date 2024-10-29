@@ -6,6 +6,42 @@
     box-sizing: border-box;
 }
 
+
+.dialog-box{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(109, 214, 252);
+    padding: 12px;
+    border-radius: 8px;
+    width: fit-content;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    gap: 10px;
+}
+
+.dialog-box-msg{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.dialog-box-btns{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.dialog-box-btn{
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.223);
+    width: 60px;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
 main{
     display: flex;
     align-items: center;
@@ -36,9 +72,25 @@ main{
     font-weight: bold;
 }
 
-.minesweeper{
+.minesweeper:not(.blurr){
     border: 1px solid black;
 }
+
+.blurr{
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(5px); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; */
+    filter: blur(5px);
+}
+
 
 .box{
     color: white;
@@ -92,6 +144,14 @@ main{
     height: 30px;
     aspect-ratio: 1 / 1;
     cursor: pointer;
+}
+
+.minesweeper-restart{
+    content: url("assets/restart.svg");
+}
+
+.minesweeper-exit{
+    content: url(assets/exit.svg);
 }
 
 .box.flag::after{

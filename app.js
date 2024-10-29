@@ -1,7 +1,7 @@
 const levelMapper = {
     easy:{
         boardSize: 10,
-        mineCount: 20
+        mineCount: 10
     },
     medium:{
         boardSize: 15,
@@ -27,6 +27,7 @@ function startGame(level="easy"){
     let flagsCount = mineCount;
     setFlagCount();
     let gameOver = false;
+    let waitTime = 2;
 
     createBoard();
     addMines();
@@ -91,7 +92,9 @@ function startGame(level="easy"){
                     box.classList.add("win");
                 }
             });
-            alert("You Won");
+            setTimeout(()=>{
+                endGame(true);
+            }, waitTime*1000);
         }
 
         box.classList.add("revealed");
@@ -122,7 +125,10 @@ function startGame(level="easy"){
         if (mines.includes(box.id)){
             revealMines();
             gameOver = true;
-            alert("You Lost");
+            // alert("You Lost");
+            setTimeout(()=>{
+                endGame();
+            }, waitTime*1000);
         }
     }
 
@@ -163,9 +169,49 @@ function startGame(level="easy"){
         }
     }
 
+    
 }
 
 document.addEventListener("DOMContentLoaded", startGame("easy"));
+
+function endGame(won=false){
+    const main = document.querySelector('main');
+    const minesweeper = document.querySelector('.minesweeper');
+
+    minesweeper.classList.add("blurr");
+    const dialogBox = document.createElement("div");
+    dialogBox.classList.add("dialog-box");
+
+    const dialogBoxMsg = document.createElement("span");
+    dialogBoxMsg.classList.add("dialog-box-msg");
+
+    const dialogBoxBtn = document.createElement("div");
+    dialogBoxBtn.classList.add("dialog-box-btns");
+
+    const dialogRestart = document.createElement("img");
+    dialogRestart.classList.add("minesweeper-restart", "dialog-box-btn");
+    dialogRestart.addEventListener("click", ()=>{
+        dialogBox.remove();
+        minesweeper.classList.remove("blurr");
+        startGame();
+    });
+
+    const dialogExit = document.createElement("img");
+    dialogExit.classList.add("minesweeper-exit", "dialog-box-btn");
+
+    dialogBoxBtn.append(dialogRestart, dialogExit);
+    dialogBox.append(dialogBoxMsg, dialogBoxBtn);
+
+    if (won){
+        dialogBoxMsg.innerText = "CONGRATULATIONS! YOU'VE WON 🎉";
+    }else{
+        dialogBoxMsg.innerText = "OOPS! YOU STEPPED ON A MINE 💣💥"
+    }
+    
+    main.append(dialogBox);
+    // console.log(main);
+}
+
 
 function selectLevel(){
     const levelSelect = document.querySelector('.minesweeper-level');
@@ -176,8 +222,8 @@ function selectLevel(){
     });
 }
 
-function restartGame(){
-    const restart = document.querySelector('.minesweeper-restart');
+function restartGame(className=".minesweeper-restart"){
+    const restart = document.querySelector(className);
     restart.addEventListener("click", ()=>{
         startGame();
     });
